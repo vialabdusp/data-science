@@ -74,9 +74,9 @@ import numpy as np
 
 Comments let you document your code and are not executed. They are very useful when sharing code, or even when going back to your own code after a while. It is good practice to comment your code. We can have single or multi line comments.
 
-Single-line comments start with the hash character, # , and extend to the end of the physical line. A comment may appear at the start of a line or following whitespace or code.
+Single-line comments start with the hash character, `#` (AKA, octothorpe, pound sign... [pick your poison](https://en.wikipedia.org/wiki/Number_sign)), and extend to the end of the physical line. A comment may appear at the start of a line or following whitespace or code.
 
-Multiline comments are known as docstrings. They start with “”” and end with “””. 
+Multiline comments are known as docstrings. They start with `“””` and end with `“””`. 
 
 
 
@@ -544,6 +544,35 @@ Python is an imperative programming language. In computer science, imperative pr
 * branches
 * loops
 * function calls
+
+### Regarding Whitespace in Python
+
+One other feature that makes Python unusual is that *indentation really matters*. In the code below, notice that lines of code following the `if` and `else` statements are indented. While coders make extensive use of indenting in all languages, in most of these other languages, there is no meaning attached to the indentation. Indentation makes code readable, but it for the benefit of the reader, not the computer. A series of commands will function the same way whether they are printed on one line or over many. 
+
+**This is not the case with Python.** Python makes syntactical use of indentation to denote code that is nested. Javascript uses `{}` to perform this same function. So, for example, the following code blocks are equivalent:
+
+```js
+// simple Javascript if statement split over multiple lines
+var x = true;
+if (x == true) {
+    console.log("It's the real deal!");
+} else {
+    console.log("It's a fake!"
+}
+// simple Javascript if statement on a single line
+var x = true; if (x == true) { console.log("It's the real deal!"); } else { console.log("It's a fake!" }
+```
+
+```python
+# the same if statement written in Python
+x = true;
+if x == true:
+    print("It's the real deal!")
+else:
+    print("It's a fake!")
+```
+
+Which is all to say, Python requires that you code readibly, which means that you can cause errors by not being cautious with your indentation.
 
 ### Branching with Booleans
 
