@@ -1,17 +1,17 @@
 
-Todays lecture:
-===============
-* introduction to Python
-    - Syntax
-    - Libraries
-    - Datatypes 
-    - Data Structures
-    - Collections
-    - Loops
-    - Flow Control
+# Introduction to Python
 
-## Python:
+***
 
+- Syntax
+- Libraries
+- Datatypes 
+- Data Structures
+- Collections
+- Loops
+- Flow Control
+
+## Python
 
 <a href="https://www.python.org/">Python</a> is an increasingly popular high-level programming language. It emphasizes legibility over highly complex structure. Python innately provides simple data structures allowing for easy data manipulation. Python provides a simple approach to object-oriented programming, which in turn allows for intuitive programming, and has resulted in a large user community that has created numerous libraries that extend the basic capacities of the language. 
 
