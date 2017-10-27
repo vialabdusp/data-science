@@ -168,7 +168,7 @@ print(type(division))
 
 
 #### 2. Numeric Types and Their Methods
-Python implements four distinct numeric types: plain integers, long integers, floating point numbers, and complex numbers. In addition, Booleans are a subtype of plain integers.
+Python implements three distinct numeric types: integers, floating point numbers, and complex numbers. In addition, Booleans are a subtype of integers. Incidentally, this is a difference between Python 2 and Python 3: Python 2 included both plain integers and long integers, which could hold numbers of different sizes---it was possible to 'overflow' a plain integer. This is no longer the case in Python 3.
 
 Every time we define a variable with a number, we are constructing an instance of a specific numeric datatype. Different datatypes have different constructors; to construct a numeric data type, you only need to type it! In general, numeric types (and data types) have methods and properties. Properties store attributes of a given object, and methods allow you to do thing with it!
 
