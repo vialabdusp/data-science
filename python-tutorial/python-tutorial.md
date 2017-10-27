@@ -1,10 +1,10 @@
 
-Todays Workshop:
+Todays lecture:
 ===============
-* Introduction to Python
+* introduction to Python
     - Syntax
     - Libraries
-    - Datatypes
+    - Datatypes 
     - Data Structures
     - Collections
     - Loops
@@ -13,26 +13,36 @@ Todays Workshop:
 ## Python:
 
 
-[Python](https://www.python.org/) is an increasingly popular high-level programming language. It emphasizes legibility over highly complex structure. Python innately provides simple data structures allowing for easy data manipulation. Python provides a simple approach to object-oriented programming, which in turn allows for intuitive programming, and has resulted in a large user community that has created numerous libraries that extend the basic capacities of the language.
+<a href="https://www.python.org/">Python</a> is an increasingly popular high-level programming language. It emphasizes legibility over highly complex structure. Python innately provides simple data structures allowing for easy data manipulation. Python provides a simple approach to object-oriented programming, which in turn allows for intuitive programming, and has resulted in a large user community that has created numerous libraries that extend the basic capacities of the language. 
 
 Python is an "interpretted" language. This means that every Python command that is executed is actually translated to lower-level programming languages. Lower-level programming languages are very fast and powerful, but writing programs in these languages can be difficult.
 
 There are two widely-used versions of Python: Python 2 and Python 3. Python 3 is newer and addresses many of the idiosyncracies and inconsistencies that characterized Python 2. However! Python 2 is still widely used; this is because while the fundamentals of the two versions are the same, there are some significant (mostly syntactical) differences between the two, which makes Python 3 NOT backwards compatible. (I.e., code written in Python 2 will, in most cases, not run in Python 3). This means that you'll <strong>always</strong> need to double-check which version of Python a given script is written in. In this class, we are using Python 3.
 
 There are a number of great Python tutorials available on the web, some can be found here:
-
-+ [Python Docs Tutorial](https://docs.python.org/3/tutorial/)
-+ [Python Guide to Tutorials](http://docs.python-guide.org/en/latest/intro/learning/)
+</p>
+<ul>
+    <li>
+        <a href="https://docs.python.org/3/tutorial/">Python Docs Tutorial</a>
+    </li>
+    <li>
+        <a href="http://docs.python-guide.org/en/latest/intro/learning/">Python Guide to Tutorials</a>
+    </li>
+</ul>
 
 There are also some excellent Python textbooks and cookbooks. A simple Amazon search will reveal many. In particular, we recommend and are using the following from the MIT Press:
-
-+ [Guttag, John. *Introduction to Computation and Programming Using Python*. Cambridge, MA: MIT, 2016. Print.](https://www.amazon.com/Introduction-Computation-Programming-Using-Python/dp/0262529629/ref=sr_1_1?ie=UTF8&qid=1485962191&sr=8-1&keywords=Introduction+to+Computation+and+Programming+Using+Python)
+</p>
+<ul>
+    <li>
+        <a href="https://www.amazon.com/Introduction-Computation-Programming-Using-Python/dp/0262529629/ref=sr_1_1?ie=UTF8&qid=1485962191&sr=8-1&keywords=Introduction+to+Computation+and+Programming+Using+Python">Guttag, John. <em>Introduction to Computation and Programming Using Python</em>. Cambridge, MA: MIT, 2016. Print.</a>
+    </li>
+</ul>
 
 ## Python Libraries
 
-Python is a dynamically typed language. A language has dynamic typing when variable types are not predefined like in a compiled language; the type of a value is evaluated when the code is run, based on how you are attempting to use it.
+Python is a dynamically typed language. A language has dynamic typing when variable types are not predefined like in a compiled language; the type of a value is evaluated when the code is run, based on how you are attempting to use it. 
 
-Dynamic typing is one of the factors that has led to Python's popularity. However, Python's Standard Library only provides very basic functionality. In order to extend Python’s functionality, its user community has created a very large number of libraries. A library is a module that can be imported to add functionality. Libraries usually take advantage of Object-Oriented-Programming, defining Python objects in additional scripts that can then be instantiated in our current code.
+Dynamic typing is one of the factors that has led to Python's popularity. However, Python's Standard Library only provides very basic functionality. In order to extend Python’s functionality, its user community has created a very large number of libraries. A library is a module that can be imported to add functionality. Libraries usually take advantage of Object-Oriented-Programming, defining Python objects in additional scripts that can then be instantiated in our current code. 
 
 Loading libraries into our current context can be computationally expensive---loading large libraries (or libraries in large numbers) can hog system resources. For that reason, Python requires us to explicitly load the libraries that we want to use:
 
@@ -55,7 +65,6 @@ import matplotlib as plt
 
 ```python
 # Import Libraries for use later in script
-from IPython.display import HTML
 import math
 import matplotlib
 import numpy as np
@@ -71,7 +80,7 @@ Comments let you document your code and are not executed. They are very useful w
 
 Single-line comments start with the hash character, # , and extend to the end of the physical line. A comment may appear at the start of a line or following whitespace or code.
 
-Multiline comments are known as docstrings. They start with “”” and end with “””.
+Multiline comments are known as docstrings. They start with “”” and end with “””. 
 
 
 
@@ -79,7 +88,7 @@ Multiline comments are known as docstrings. They start with “”” and end wi
 # This is a single-line comment.
 
 """
-This is a
+This is a 
 multiline
 comment
 """
@@ -87,9 +96,12 @@ comment
 print("Comments worked!")
 ```
 
+    Comments worked!
+
+
 ## Python Data Structures
 
-A data structure is a way of organizing data in the computer memory. Most languages allow more complicated composite types to be recursively constructed starting from basic types.
+A data structure is a way of organizing data in the computer memory. Most languages allow more complicated composite types to be recursively constructed starting from basic types. 
 
 ### 1. Variables
 
@@ -132,7 +144,7 @@ print(x)
 
 
 ```python
-# the following retrieves the value stored in x, adds 2 to it,
+# the following retrieves the value stored in x, adds 2 to it, 
 # and stores the result in x.
 x+=2
 print(x)
@@ -162,7 +174,7 @@ Every time we define a variable with a number, we are constructing an instance o
 
 
 ```python
-# Integers (int) are a numerical data-type.
+# Integers (int) are a numerical data-type. 
 print(1+2)
 print(type(1+2))
 ```
@@ -219,11 +231,11 @@ print(type(1.0+5))
 #### 3. Strings:
 Strings are sets of characters. We can create them by enclosing characters in quotes. Python treats single quotes the same as double quotes.
 
-Strings can be thought of as lists of characters. Therefore, we can access substrings (portions of strings) by specifiying numbered locations in the list. They also have a number of methods or operations that we can perform with them.
+Strings can be thought of as lists of characters. Therefore, we can access substrings (portions of strings) by specifiying numbered locations in the list. They also have a number of methods or operations that we can perform with them. 
 
 
 ```python
-# A string is sequence of characters.
+# A string is sequence of characters. 
 print("Hello World.")
 
 # Let's store a string in a variable called "s".
@@ -232,12 +244,19 @@ string = 'This is a string.'
 print(string)
 ```
 
+    Hello World.
+    This is a string.
+
+
 
 ```python
 # We can access individual characters from the string. Python stores the string like an array, think of it as [S, t, r, i, n, g]
 # like a list of characters
 print(string[2])
 ```
+
+    i
+
 
 
 ```python
@@ -246,22 +265,31 @@ string = string + " Another string."
 print(string)
 ```
 
+    This is a string. Another string.
+
+
 
 ```python
 string+=" A third string."
 print(string)
 ```
 
+    This is a string. Another string. A third string.
+
+
 
 ```python
-# booleans, or bools, are another data type. They can hold only two
+# booleans, or bools, are another data type. They can hold only two 
 # possible values: True or False.
 is_true = True
 print(is_true)
 ```
 
+    True
+
+
 #### 4. Booleans
-Booleans are binary datatypes. They have 2 values: **True** and **False** (or 1 and 0). Booleans are useful when testing for truth value; we can test them in an **if** or **while** condition or as operand of Boolean operations.
+Booleans are binary datatypes. They have 2 values: **True** and **False** (or 1 and 0). Booleans are useful when testing for truth value; we can test them in an **if** or **while** condition or as operand of Boolean operations. 
 
 
 ```python
@@ -326,7 +354,7 @@ print(x != y)
     True
 
 
-###### 5. Operators
+###### 5. Operators 
 Operators and operands are something you're familiar with by now - they're special tokens that represent computations like addition, multiplication and division. The values the operators work on are operands. The common ones are +, -, *, **, /
 Less common operators include:
 // for integar division
@@ -384,16 +412,16 @@ print(total_secs, "seconds equals", hours, "hours", minutes, "minutes and", secs
     7684 seconds equals 2 hours 8 minutes and 4 seconds!
 
 
-###### 6. Comparisons
-A lot of programming is comparing values, so we've already been using comparisons in the code we've written. A couple key distinctions are that '=' is for assignment and '==' is for testing for equality.
+###### 6. Comparisons 
+A lot of programming is comparing values, so we've already been using comparisons in the code we've written. A couple key distinctions are that '=' is for assignment and '==' is for testing for equality. 
 As we've done already when we say x = 1 we are assigning the value 1 to x. If we want to test if x is 1 we would use ==
 
-When testing for equality or any other comparison (<, >, !=) we are asking a question so the result is true or false.
-1 == 1 is asking is 1 exactly equal to 1? So the response would be true.
+When testing for equality or any other comparison (<, >, !=) we are asking a question so the result is true or false. 
+1 == 1 is asking is 1 exactly equal to 1? So the response would be true. 
 
 
 ```python
-# There are functions to make comparisons between valuables and produce bools.
+# There are functions to make comparisons between valuables and produce bools. 
 # '==' tests for equality
 print(1 == 2)
 print(1 == 1)
@@ -429,7 +457,7 @@ print(x == y)
 
 
 ```python
-# set x and y to be the same pointer
+# set x and y to be the same pointer 
 x = y
 print(x)
 print(y)
@@ -449,7 +477,7 @@ Python is an imperative programming language. In computer science, imperative pr
 * branches
 * function calls
 
-Booleans can be used to control the flow of execution of the code. If-statements execute a section of code if a given bool evaluates to True. There is a specific syntax for booleans, including indentations.
+Booleans can be used to control the flow of execution of the code. If-statements execute a section of code if a given bool evaluates to True. There is a specific syntax for booleans, including indentations. 
 
 
 ```python
@@ -477,7 +505,7 @@ else:
     B
 
 
-#### 7. Lists
+#### 7. Lists 
 Lists are a data structure designed for easy storage and access to data. They are initialized by using "**[ ]**" to enclose a comma separated sequence of values. These values can be anything. Lists can contain the same type of values, or a heterogeneous mix of values.  We can access individual elements of a list, a subset of elements, or the whole list. Lists are mutable: we can modify their elements.
 
 Python deals with multiple data structures in a similar manner. For example lists, dictionaries, files, and and iterators work similarly.
@@ -488,7 +516,7 @@ Python deals with multiple data structures in a similar manner. For example list
 L1 = [] # an empty list
 x = 5
 L2 = [1,2.0,'a',"abcd",True,x] # a list containing different values
-# lists can be built dynamically (aka on the fly) using "append" and
+# lists can be built dynamically (aka on the fly) using "append" and 
 # "extend".
 L1.append(1)
 L1.append(2)
@@ -497,7 +525,7 @@ L3 = ['a','b','c']
 L1.extend(L3)
 L1.append(L3)
 print(L1)
-# Values stored in lists are accessible by their index in the list.
+# Values stored in lists are accessible by their index in the list. 
 # Lists maintain the ordering in which values were stored in them.
 # We use "[i]" to retrieve the i-th element in a list.
 # Note that the first element in a list in Python has index 0.
@@ -534,7 +562,7 @@ print(len(range(10)))
 
 
 #### 8. Iteration
-Loops allow us to automate repetitive tasks. The repeated execution of a set of statements is called iteration. There are a number of way to iterate in Python. We can use **for** loops or **while** loops too. The syntax is like the syntax of if-statements. The **for** loop loops over each of the elements of a list or iterator, assigning the current element to the variable name given. A **while** loop repeats a sequence of statements until some condition becomes false.
+Loops allow us to automate repetitive tasks. The repeated execution of a set of statements is called iteration. There are a number of way to iterate in Python. We can use **for** loops or **while** loops too. The syntax is like the syntax of if-statements. The **for** loop loops over each of the elements of a list or iterator, assigning the current element to the variable name given. A **while** loop repeats a sequence of statements until some condition becomes false. 
 
 
 
@@ -619,6 +647,13 @@ while i < 10:
         break
 ```
 
+    0
+    1
+    2
+    3
+    4
+
+
 You can iterate through lists.
 
 
@@ -629,6 +664,14 @@ for i in myList:
     print(myList.index(i)) # print the position of the value (index)
 
 ```
+
+    This
+    0
+    is
+    1
+    Python
+    2
+
 
 Build a list that contains all the courses that you are taking this semester, and print them. Every time you print a course number add the phrase `In Fall 2017, I am taking:`
 
@@ -653,9 +696,9 @@ for i in range(100):
     x+=i
 print(x)
 
-# What if we do this for a new initial value for x?
+# What if we do this for a new initial value for x? 
 # What if we use a different number instead of 100?
-# We don't want to rewrite this for loop every time.
+# We don't want to rewrite this for loop every time. 
 # Let's define a function.
 def ForSum(x,y):
     for i in range(y):
@@ -699,9 +742,10 @@ def print_words(x="THIS",y="Not Bob"):
 
 x = "Bob"
 y = "Something else"
-
+    
 print_words(x, y)
 ```
 
     Bob
     Something else
+
