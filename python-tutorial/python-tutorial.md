@@ -3,13 +3,11 @@
 
 ***
 
-- Syntax
 - Libraries
-- Datatypes 
 - Data Structures
-- Collections
-- Loops
+- Operators
 - Flow Control
+- Functions
 
 ## Python
 
@@ -354,7 +352,63 @@ print(x != y)
     True
 
 
-### Operators 
+### Lists 
+Lists are a data structure designed for easy storage and access to data. They are initialized by using "**[ ]**" to enclose a comma separated sequence of values. These values can be anything. Lists can contain the same type of values, or a heterogeneous mix of values.  We can access individual elements of a list, a subset of elements, or the whole list. Lists are mutable: we can modify their elements.
+
+Python deals with multiple data structures in a similar manner. For example lists, dictionaries, files, and and iterators work similarly.
+
+
+
+```python
+L1 = [] # an empty list
+x = 5
+L2 = [1,2.0,'a',"abcd",True,x] # a list containing different values
+# lists can be built dynamically (aka on the fly) using "append" and 
+# "extend".
+L1.append(1)
+L1.append(2)
+print(L1)
+L3 = ['a','b','c']
+L1.extend(L3)
+L1.append(L3)
+print(L1)
+# Values stored in lists are accessible by their index in the list. 
+# Lists maintain the ordering in which values were stored in them.
+# We use "[i]" to retrieve the i-th element in a list.
+# Note that the first element in a list in Python has index 0.
+L = ['a','b','c','d','e']
+print(L[0])
+print(L[1])
+# We can access from the ends of lists as well.
+print(L[-1])
+print(L[-2])
+# We can access chunks of a list to produce sub-lists.
+print(L[:2])
+print(L[2:4])
+#print [1,2]+['a','b']
+# There is a useful function for producing sequences of numbers.
+print(range(10))
+print(range(2,10))
+print(range(4,10,2))
+# The length of a list can be calculated using "len()"
+print(len(range(10)))
+```
+
+    [1, 2]
+    [1, 2, 'a', 'b', 'c', ['a', 'b', 'c']]
+    a
+    b
+    e
+    d
+    ['a', 'b']
+    ['c', 'd']
+    range(0, 10)
+    range(2, 10)
+    range(4, 10, 2)
+    10
+
+
+## Operators 
 Operators and operands are something you're familiar with by now - they're special tokens that represent computations like addition, multiplication and division. The values the operators work on are operands. The common ones are +, -, *, **, /
 Less common operators include:
 // for integar division
@@ -412,7 +466,7 @@ print(total_secs, "seconds equals", hours, "hours", minutes, "minutes and", secs
     7684 seconds equals 2 hours 8 minutes and 4 seconds!
 
 
-### Comparisons 
+## Comparisons 
 A lot of programming is comparing values, so we've already been using comparisons in the code we've written. A couple key distinctions are that '=' is for assignment and '==' is for testing for equality. 
 As we've done already when we say x = 1 we are assigning the value 1 to x. If we want to test if x is 1 we would use ==
 
@@ -470,7 +524,7 @@ print(x is y)
     True
 
 
-###### 7. Flow Control
+## Flow Control
 Python is an imperative programming language. In computer science, imperative programming is a programming paradigm that uses statements that change a program's state. We can control the flow of the program through a number of structures. In python there are three main categories of program control flow:
 
 * loops
@@ -503,62 +557,6 @@ else:
     Flag is True.
     1
     B
-
-
-### Lists 
-Lists are a data structure designed for easy storage and access to data. They are initialized by using "**[ ]**" to enclose a comma separated sequence of values. These values can be anything. Lists can contain the same type of values, or a heterogeneous mix of values.  We can access individual elements of a list, a subset of elements, or the whole list. Lists are mutable: we can modify their elements.
-
-Python deals with multiple data structures in a similar manner. For example lists, dictionaries, files, and and iterators work similarly.
-
-
-
-```python
-L1 = [] # an empty list
-x = 5
-L2 = [1,2.0,'a',"abcd",True,x] # a list containing different values
-# lists can be built dynamically (aka on the fly) using "append" and 
-# "extend".
-L1.append(1)
-L1.append(2)
-print(L1)
-L3 = ['a','b','c']
-L1.extend(L3)
-L1.append(L3)
-print(L1)
-# Values stored in lists are accessible by their index in the list. 
-# Lists maintain the ordering in which values were stored in them.
-# We use "[i]" to retrieve the i-th element in a list.
-# Note that the first element in a list in Python has index 0.
-L = ['a','b','c','d','e']
-print(L[0])
-print(L[1])
-# We can access from the ends of lists as well.
-print(L[-1])
-print(L[-2])
-# We can access chunks of a list to produce sub-lists.
-print(L[:2])
-print(L[2:4])
-#print [1,2]+['a','b']
-# There is a useful function for producing sequences of numbers.
-print(range(10))
-print(range(2,10))
-print(range(4,10,2))
-# The length of a list can be calculated using "len()"
-print(len(range(10)))
-```
-
-    [1, 2]
-    [1, 2, 'a', 'b', 'c', ['a', 'b', 'c']]
-    a
-    b
-    e
-    d
-    ['a', 'b']
-    ['c', 'd']
-    range(0, 10)
-    range(2, 10)
-    range(4, 10, 2)
-    10
 
 
 ### Iteration
@@ -681,7 +679,7 @@ Build a list that contains all the courses that you are taking this semester, an
 
 ```
 
-### Functions
+## Functions
 Functions allow a programmer to write reusable code to perform a single action. Functions provide better modularity for your application and allow you to code much more efficienty; when you find yourself copy-pasting blocks of code throughout your script, it's often a good cue to write a function instead. Once a function is defined, it can be called by typing the name of the function and passing the arguments. For example, Python gives you many built-in functions (like **print()**).  Functions can just perform an operation, or they can return values.
 
 Functions are defined using the key work **def**.
