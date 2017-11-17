@@ -1,0 +1,103 @@
+---
+title: "Hello! My name is..."
+author: "J. Arthur Thiswhistle, Esq."
+csl: "australian-journal-of-grape-and-wine-research.csl"
+link-citations: yes
+output:
+  html_document: default
+  word_document: default
+bibliography: library.bib
+---
+
+# Welcome to R and RMarkdown!
+
+For the uninitiated: R is a free and open-source statistical programming language that is widely used by data scientists and statisticians - it also has some nifty spatial analysis functionality that we'll be touching on! If you learned SAS, SPSS, or Stata at some point in your past, you can think of R as "like that, but open-source and (arguably) better-supported."
+
+[RMarkdown](http://rmarkdown.rstudio.com/) is a useful R-oriented library that uses the [Pandoc Markdown](http://pandoc.org/MANUAL.html#pandocs-markdown) extension of the very (very) popular markup language [Markdown](https://daringfireball.net/projects/markdown/syntax), developed by John Gruber. RMarkdown is amazing for producing dynamic, reproducible documents that can directly include and reference the results of your R code, as well as the code itself. Even if you're not interested in R, it's definitely worth your time to learn Markdown if you foresee any web publishing in your future!
+
+## Markdown {#markdown}
+
+Let's write a bit of text [@amoore_politics_2013]. Let's write some more text [@light_warfare_2003; @light_nature_2009]! We can reference sections using the [link syntax](#markdown).
+
++ Unordered list item 1 [see @barad_meeting_2007, p. 17]!
+    + Unordered sub-list item 1 [@felski_limits_2015]!
+    + Unordered sub-list item 2 [@latour_facing_2017; @stengers_catastrophic_2015]!
+    + Unordered sub-list item 3 [@edwards_vast_2010; @gabrys_program_2016]!
++ Unordered list item 2 [@wilson_new_2017]!
+
+<ul>
+<li>Unordered list item 1!</li>
+<ul>
+<li>Unordered sub-list item 1!</li>
+<li>Unordered sub-list item 2!</li>
+<li>Unordered sub-list item 3!</li>
+</ul>
+<li>Unordered list item 2!</li>
+<li>Unordered list item 3!</li>
+</ul>
+  
+
+Line breaks are interpreted!
+
+## Let's Play With Some R!
+
+R's paradigmatic data type is the Data Frame---Python's `pandas` module uses the R data frame as the model for its own. Essentially, a data frame is a multidimensional array; it's incredibly, incredibly flexible. Which is wonderful and terrible. This means that we can mix data types in our columns, creating all kinds of hot messes.
+
+
+```{r}
+# R's distinctive data type is the data frame
+height = c(8, 15, 20, 60, 50, 40)
+circ = c(8, 12, 14, 14, 15, 8)
+type = c("Poplar", "Ash", "Oak", "Oak", "Ash","Oak")
+df = data.frame(height, circ, type)
+print(df)
+```
+
+Let's get some descriptive statistics...
+
+```{r}
+summary(df)
+df[,'height']
+stdDev <- sd(df[,'height'])
+```
+
+R also makes it very easy to produce many simple (if slightly inelegant) plots from your data. Here, we use the `table` function. From the R documentation:
+
+> `table` uses the cross-classifying factors to build a contingency table of the counts at each combination of factor levels.
+
+In other words, it counts the instances of categorical variables (in our case, tree type) and creates a table in which each column contains a count of tree types. (Also check out the Markdown block quote syntax!)
+
+```{r}
+tree.freq = table(df$type)
+barplot(tree.freq)
+```
+
+Let's add a bit of explanatory text. As we can see in the graph above, there were more oaks than ashes or poplars in our sample. In fact, there were `r tree.freq['Oak']` oaks. Wow! The standard deviation of species counts is `r sd(tree.freq)`.
+
+```{r}
+plot(df$height, df$circ)
+abline(lm(df$circ~df$height), col="red")
+lines(lowess(df$height,df$circ))
+```
+
+R also includes a range of spatial and mapping tools. While you're never going to make beautiful cartography in R, you will find a wide variety of useful spatial analysis tools and basic plotting tools. The below code chunk takes a raster image representing distance from the Meuse river in Belgium as its input and calculates contour lines - lines of equal elevation. Pretty neat, no?
+
+```{r}
+library(sp)
+library(maptools)
+library(geojsonio)
+data(meuse.grid)
+
+coordinates(meuse.grid) <- c("x","y")
+meuse.grid <- as(meuse.grid, "SpatialPixelsDataFrame")
+im <- as.image.SpatialGridDataFrame(meuse.grid["dist"])
+#requires maptoops library)
+cl <- ContourLines2SLDF(contourLines(im))
+spplot(cl)
+spplot(meuse.grid["dist"])
+geojson_write(cl, file = "countours.geojson")
+```
+
+For now, 
+
+# References
