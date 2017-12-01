@@ -1,0 +1,225 @@
+Welcome to the wonderful world of Shiny! Shiny is a package for the R Statistical Computing Language that allows you to quickly and easily prototype interactive and data-driven web apps. Let's get started.
+
+## Install the Package
+
+First things first: we'll need to install the Shiny package. We'll also want to install a collection of other packages to fulfill various functions (including Leaflet web mapping) for our workshop today. Run the following code in your R console:
+
+```{r eval=FALSE}
+packages <- c("shiny", "leaflet", "tigris", "maptools", "mapproj")
+install.packages(packages)
+```
+
+Note that `r install.packages` expects a vector, meaning that you need to combine the names of packages you're interested in installing using the `r c()` function.
+
+## Setting Up a Shiny App
+
+Create a new folder, called `r-shiny`, in an appropriate working space --- the name of this folder does not matter too much. Next, inform R that this is your desired *working directory*. This is done using the `r setwd()`. For example, I used:
+
+```{r eval=FALSE}
+setwd("~Desktop/working/duspviz/r-shiny/")
+```
+
+Create a new subfolder called `histogram`. In this folder, create a new R Script, saving it and calling it `App.R`. This file name does matter! Once you've saved your file, you'll want to load in the shiny library.
+
+### Loading Libraries
+
+In this new `App.R` script, load the `shiny` library using the `library('shiny')` function.
+
+### Read in Data
+
+Before setting up our App, we'll need to read our data of interest into R. I've included a file called `ma_housing_2015.csv` in this repo. Place this in a subdirectory of your histogram folder - I called this subdirectory `data`. Now load it and remove incomplete cases (i.e., cases where there are null values).
+
+```{r eval=FALSE}
+data <- read.csv("data/ma_housing_2015.csv", as.is = TRUE)
+data <- data[complete.cases(data),]
+```
+
+Remember that we can subset data in R by passing an indexing vector to another vector - in this case, complete.cases generates an array that returns TRUE if a row is complete and FALSE if it contains missing data.
+
+Dig around in the CSV a little bit - what variables are we looking at? We're looking at Median Household Incomes and Housing Expenditure by Housing Tenure; perhaps we're interested in housing expenditures by renters as a percentage of the median household income - a simple way of measuring housing affordability. I haven't included this variable, so we'll need to generate it. This is simple!
+
+```{r eval=FALSE}
+data$rou_pct <- (data$mhc_rou * 12) / data$mhi_rou * 100
+```
+
+Nice! We just produced a new column. Now let's get into Shiny.
+
+### Shiny's Basic Ingredients (`ui`, `server`, and `shinyApp`)
+
+Shiny requires three components to be defined in a complete Shiny App. These are:
+
+1. A user interface object (generally called `ui`)
+    + This specifies the layout of the app and the location of elements.
+2. A server function (generally called `server`)
+    + This gives instructions on how to build the app.
+3. A `shinyApp` funcion call (i.e., `shinyApp(ui = ..., server = ...`)
+    + This actually passes parameters to the shiny builder, creating an App.
+    
+Let's construct the UI function.
+
+### UI
+
+Place the following code immediately after your code that loads the `shiny` library.
+
+```{r eval=FALSE}
+# Define UI for app that draws a histogram ----
+ui <- fluidPage(
+  
+  # App title ----
+  titlePanel("Housing Costs by Tenure in Massachusetts"),
+  
+  # Sidebar layout with input and output definitions ----
+  sidebarLayout(
+    
+    # Sidebar panel for inputs ----
+    sidebarPanel(
+      
+      # Input: Slider for the number of bins ----
+      sliderInput(inputId = "bins",
+                  label = "Number of bins:",
+                  min = 1,
+                  max = 50,
+                  value = 30)
+      
+    ),
+    
+    # Main panel for displaying outputs ----
+    mainPanel(
+      
+      # Output: Histogram ----
+      plotOutput(outputId = "distPlot")
+      
+    )
+  )
+)
+```
+
+We see here how simple Shiny makes this: we use the built-in `titlePanel` function to title our app, and use built-in sidebar functions to place a slider that allows us to specify the number of bins in our histogram. Shiny has many different ways of allowing the user to provide input to which your app can respond; a complete list is available [here](https://shiny.rstudio.com/reference/shiny/1.0.5/). For now, note that our `sliderInput` has an `inputID` of `bins`. This will allow us to reference it later in our script. Similarly, our `plotOutput` has an ID of `distPlot`.
+
+Reading this portion of the script, we understand that our App will have three basic elements: a title, a sidebar, and a mainPanel.
+
+
+### The Server Function
+
+Place the following code immediately below your UI object.
+
+```{r eval=FALSE}
+server <- function(input, output) {
+  
+  # Histogram of ACS Housing Data ----
+  # with requested number of bins
+  # This expression that generates a histogram is wrapped in a call
+  # to renderPlot to indicate that:
+  #
+  # 1. It is "reactive" and therefore should be automatically
+  #    re-executed when inputs (input$bins) change
+  # 2. Its output type is a plot
+  output$distPlot <- renderPlot({
+    
+    x    <- data$rou_pct
+    bins <- seq(min(x), max(x), length.out = input$bins + 1)
+    
+    hist(x, breaks = bins, col = "#75AADB", border = "white",
+         xlab = "Housing Cost as a Percentage of Median Household Income",
+         main = "")
+    
+  })
+  
+}
+```
+
+Here, we see that we're creating a new variable `x` when the server object is created that is our variable of interest in the `data` dataframe - the `rou_pct` variable we created above! We next create a sequence of integers between the minimum and maximum values, divided neatly into the number of bins set by our slider bar above! Cool!
+
+Next, we can pass our variables to the `hist()` function and set some basic styles. To complete our app we simply have to...
+
+### Call the `shinyApp` Function
+
+Like so:
+
+```{r eval=FALSE}
+shinyApp(ui = ui, server = server)
+```
+
+Your first Shiny app is complete! Run it by using the command `runApp("histogram").` Make sure that your working directory is set correctly if you get an error.
+
+
+## Make a Web Map Using Leaflet!
+
+That example was pretty basic, but we can also do more sophisticated work without adding a whole lot of complexity. Create a new subdirectory in your `r-shiny` folder and call it `leaflet-housing`. Just like before, create a new `app.R` file in the new directory.
+
+
+### Load libraries
+
+We'll need to add some additional libraries, though we should have already installed these above. Load them like so:
+
+```{r eval=FALSE}
+library(shiny)
+library(mapproj)
+library(maptools)
+
+# Load tigris library for downloading Census geometries
+library(tigris)
+library(leaflet)
+```
+
+At least one of these should look very familiar: the `leaflet` library for R allows us to build maps using `leaflet.js` maps without ever writing a single line of JavaScript.
+
+Let's do some intial set-up. Copy the `ma_housing_2015.csv` file into a `data` subfolder of your Shiny app. Include the following code in your R Script: 
+
+```{r eval=FALSE}
+
+pal <- colorQuantile("YlGn", NULL, n = 5)
+
+ma <- tracts(25, cb = TRUE, year = 2015)
+
+data <- read.csv("data/ma_housing_2015.csv", as.is = TRUE)
+data$geoid <- as.character(data$geoid)
+data$rou_pct <- (data$mhc_rou * 12) / data$mhi_rou * 100
+
+ma_join <- merge(ma, data, by.x = "GEOID", by.y = "geoid")
+
+```
+
+This code uses the (very cool) `tigris` library to automatically download census geometries from the US Census at the tract level for  Massachusetts (FIPS code 25). We then ensure that we can join our datasets using the datasets respective geoid field.
+
+Now let's set up our page, keeping it very simple:
+
+```{r eval=FALSE}
+ui <- fluidPage(
+  titlePanel("Housing Costs by Tenure in Massachusetts"),
+  
+  sidebarLayout(
+    sidebarPanel(
+      helpText("Create a map with information from the 2015 American Community Survey.")
+      ),
+    
+    mainPanel(leafletOutput("map"))
+  )
+)
+```
+
+
+Note that we're using the built-in `leafletOutput` function to inform Shiny that it should expect a Leaflet map. What did we use previously?
+
+
+```{r eval=FALSE}
+# Server logic ----
+server <- function(input, output) {
+  
+  output$map <- renderLeaflet({
+    leaflet(ma_join) %>%
+      addProviderTiles("CartoDB.Positron") %>%
+      addPolygons(fillColor = ~pal(rou_pct), 
+                  fillOpacity = 0.8, 
+                  color = "#FFFFFF", 
+                  weight = 1)
+  })
+}
+
+# Run app ----
+shinyApp(ui, server)
+```
+
+Check out the Leaflet syntax.
+
+Run this app using the command `RunApp("leaflet-housing")`.
